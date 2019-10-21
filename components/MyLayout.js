@@ -1,24 +1,22 @@
-import Header from './Header'
+// import Header from './Header'
+import Menu from './Default/Menu';
+import Footer from './Default/Footer';
 import Head from './Head'
 
-const layoutStyle = {
-  margin: 'auto',
-  padding: 20,
-  border: '1px solid #DDD',
-  maxWidth: 780,
-  minHeight: '50vh'
-}
 
 export default function Layout(props) {
     return (
-        <div>
+        <>
             <Head title={props.title} description={props.description} />
-            <div style={layoutStyle}>
-                <Header />
-                { props.children }
-            </div>
+            <Menu />
+                { props.children }           
+            <Footer/>
             <style jsx global>{`
                 @import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative:400,700|Nunito:600');
+                * {
+                    margin: 0;
+                    padding: 0;
+                }
                 html, body {
                     background: linear-gradient(to bottom right,#024,#402) !important;
                 }
@@ -27,6 +25,6 @@ export default function Layout(props) {
                     font-family: Cinzel Decorative, sans-serif;
                 }
             `}</style>
-        </div>
+        </>
     )
 }

@@ -76,6 +76,7 @@ export default function Lista ( {poke} )  {
                     height: 2px;
                     border: none;
                     border-radius: 30%;
+                    margin: 10px auto;
                 }
 
                 ul {

@@ -1,9 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 import Link from 'next/link'
-import { useRouter } from 'next/router';
-
-
-import { useState, useEffect } from 'react'
+import {  useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { pokemonThunks } from "../state/thunks/pokemonThunks";
 import { pokemonsActions } from '../state/actions/PokemonActions'
@@ -11,36 +8,46 @@ import { pokemonsActions } from '../state/actions/PokemonActions'
 import Layout from '../components/MyLayout.js'
 import Lista from '../components/pokemon/lista'
 
-
-
 export default function Index( { data, next, previous } ) {
-    const state = useSelector( state => state)
     const  dispatch  = useDispatch();
 
     useEffect(()=>{
-        // dispatch(pokemonThunks.getAll());
         dispatch( pokemonsActions.get( data ) )
     },[] )
 
    
     return (
         <Layout title={'My Blog'} description={'This is My blog'}>
-            <h1>Pokemons</h1>
-            { data ? (
-                <ul> { data.map( pokemon => <Lista key={pokemon.name} poke={pokemon}/>) } </ul>
-            ) : (
-                <h1 className="loding">Carregando....</h1>
-            ) } 
-            <div className="paginacao">
-                { previous ? <Link href={`/?offset=${previous}`}><a>Previous</a></Link> : null }
-                <Link href={`/?offset=${next}`}><a>Next</a></Link>                
-            </div>        
+            <div className="container-index">
+                <h1>Pokemons</h1>
+                { data ? (
+                    <ul> { data.map( pokemon => <Lista key={pokemon.name} poke={pokemon}/>) } </ul>
+                ) : (
+                    <h1 className="loding">Carregando....</h1>
+                ) } 
+                <div className="paginacao">
+                    { previous ? <Link href={`/?offset=${previous}`}><a>Previous</a></Link> : null }
+                    <Link href={`/?offset=${next}`}><a>Next</a></Link>                
+                </div>                
+            </div>
 
             <style jsx>{`
+                .container-index {
+                    padding: 100px 0px;
+                    /* max-width: 60rem; */
+                    min-height: 50vh;
+                    // display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    /* flex-direction: column; */
+                    /* flex-wrap: wrap; */
+                    margin: 0 auto;
+                }
                 h1 {
                     color: #fff;
                     font-size: 3rem;
                     text-align: center;
+                    margin: 0px 0px 45px;
                 }
                 .loding  {
                     color: red;
@@ -50,6 +57,8 @@ export default function Index( { data, next, previous } ) {
                     display: flex;
                     flex-direction: row;
                     flex-flow: wrap;
+                    margin: 0 auto;
+                    justify-content: center;
                 }
                 .paginacao {
                     display: flex;
@@ -109,9 +118,4 @@ const loadPokemon = async (data) => {
     }))
     return _pokemonData;
 }
-
-const splitUrl = ( url ) => {
-
-}
-
 
