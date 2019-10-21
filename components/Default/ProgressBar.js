@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 /* eslint-disable react/prefer-stateless-function */
 class NextNProgress extends React.Component {
     static defaultProps = {
-        color: '#29D',
+        color: '#00fa9a',
         startPosition: 0.3,
         stopDelayMs: 200,
         height: 3,
@@ -37,7 +37,7 @@ class NextNProgress extends React.Component {
                 #nprogress .bar {
                     background: ${color};
                     position: fixed;
-                    z-index: 1031;
+                    z-index: 999999;
                     top: 0;
                     left: 0;
                     width: 100%;
@@ -55,10 +55,10 @@ class NextNProgress extends React.Component {
                     -ms-transform: rotate(3deg) translate(0px, -4px);
                     transform: rotate(3deg) translate(0px, -4px);
                 }
-                    #nprogress .spinner {
+                #nprogress .spinner {
                     display: "block";
                     position: fixed;
-                    z-index: 1031;
+                    z-index: 999999;
                     top: 15px;
                     right: 15px;
                 }

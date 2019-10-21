@@ -4,6 +4,8 @@ import {  useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { pokemonThunks } from "../state/thunks/pokemonThunks";
 import { pokemonsActions } from '../state/actions/PokemonActions'
+import { getAllPokemon, loadPokemon } from '../services/pokemons'
+import { splitUrl } from '../utils/pokemon'
 
 import Layout from '../components/MyLayout.js'
 import Lista from '../components/pokemon/lista'
@@ -13,7 +15,7 @@ export default function Index( { data, next, previous } ) {
 
     useEffect(()=>{
         dispatch( pokemonsActions.get( data ) )
-    },[] )
+    },[])
 
    
     return (
@@ -79,43 +81,14 @@ export default function Index( { data, next, previous } ) {
 }
 
 Index.getInitialProps = async function( context ) {
-    const url = context.query;       
-    const baseUrl = url.offset || 'https://pokeapi.co/api/v2/pokemon';
-
+    const url = context.query;                
+    const baseUrl = `https://pokeapi.co/api/v2/pokemon?${url.offset}&limit=20`;
     const response = await getAllPokemon(baseUrl)
     const result = await loadPokemon(response.results);  
-
     return {
         data: result,
-        next: response.next ,
-        previous: response.previous,
+        next: splitUrl( response.next ),
+        previous: splitUrl( response.previous ),
     };
+  
 };
-
-
-function getAllPokemon(url) {
-    return new Promise((resolve, reject) => {
-        fetch(url).then(res => res.json())
-            .then(data => {
-                resolve(data)
-            })
-    });
-}
-
-function getPokemon({ url }) {
-    return new Promise((resolve, reject) => {
-        fetch(url).then(res => res.json())
-            .then(data => {
-                resolve(data)
-            })
-    });
-}
-
-const loadPokemon = async (data) => {
-    let _pokemonData = await Promise.all(data.map(async pokemon => {
-        let pokemonRecord = await getPokemon(pokemon)
-        return pokemonRecord
-    }))
-    return _pokemonData;
-}
-
