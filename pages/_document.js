@@ -17,7 +17,8 @@ class MyDocument extends Document {
                 <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico" />
                 <link rel="apple-touch-icon" sizes="180x180" href="/static/images/reddit-logo.png" />
                 <link rel="apple-touch-startup-image" href="/static/images/reddit-logo.png" />
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+                {/* <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" /> */}
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel+Decorative:400,700|Nunito:600" />
                 <link rel="stylesheet" href="https://unpkg.com/react-gif-player@0.4.2/dist/gifplayer.css" />
             </Head>
                 <body>

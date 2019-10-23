@@ -12,7 +12,6 @@ export default function Layout(props) {
                 { props.children }           
             <Footer/>
             <style jsx global>{`
-                @import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative:400,700|Nunito:600');
                 * {
                     margin: 0;
                     padding: 0;
@@ -22,7 +21,7 @@ export default function Layout(props) {
                 }
 
                 #app {
-                    font-family: Cinzel Decorative, sans-serif;
+                    font-family: Cinzel Decorative, sans-serif !important;
                 }
             `}</style>
         </>
